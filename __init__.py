@@ -24,12 +24,13 @@ class CourseVisit(Thread):
         if login_action == 'LoginSucceed':
             course_get = CourseList()
             course_get_action = course_get.connect_course()
+            profile_id = course_get.profileID
             print(course_get_action)
             if course_get_action == 'CourseListGetSucceed':
                 course_list = course_get.load_course_list()
                 for courseNow in cfg.courseCode:
                     print('CourseRequired:', courseNow)
-                    select = Select(course_list, courseNow)
+                    select = Select(course_list, courseNow, profile_id)
                     course_found_result, course_info = select.query()
                     print(course_found_result, course_info)
                     if course_found_result == 'CourseFound':
