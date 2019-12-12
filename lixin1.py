@@ -32,7 +32,8 @@ header3 = {
     'Accept': 'text/html, */*; q=0.01',
     'Accept-Language': 'en-US,zh-CN;q=0.5',
     'Accept-Encoding': 'gzip, deflate',
-    'Referer': 'http://newjw.lixin.edu.cn/webapp/std/edu/lesson/std-elect-course!defaultPage.action?electionProfile.id=',
+    'Referer': 'http://newjw.lixin.edu.cn/webapp/std/edu/lesson/std-elect-course!defaultPage.action?electionProfile.id=' + str(
+        cfg.profileID),
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
     'X-Requested-With': 'XMLHttpRequest',
     'Content-Length': '27',
@@ -60,15 +61,12 @@ class CourseList:
         self.enterPage = "http://newjw.lixin.edu.cn/webapp/std/edu/lesson/std-elect-course.action"
         self.coursePage = 'http://newjw.lixin.edu.cn/webapp/std/edu/lesson/std-elect-course!defaultPage.action?electionProfile.id='
         self.courseList = 'http://newjw.lixin.edu.cn/webapp/std/edu/lesson/std-elect-course!data.action?profileId='
-        self.profileID = None
+        self.profileID = str(cfg.profileID)
         self.courseDatabase = []
         self.courseGetModel = None
 
     def connect_course(self):
-        enter_context = session.get(self.enterPage)
-        self.profileID = BeautifulSoup(enter_context.text, features='html.parser').find(
-            lambda x: x.name == 'a' and '进入选课' in x.text
-        ).attrs['href'].split('=')[-1]
+        _ = session.get(self.enterPage)
         _ = session.get(self.coursePage + self.profileID)
         header4 = header1.copy()
         login_cookies = session.cookies.get_dict()
@@ -95,12 +93,12 @@ class CourseList:
 
 
 class Select:
-    def __init__(self, course_database, course_now, profile_id):
+    def __init__(self, course_database, course_now):
         self.courseDatabase = course_database
         self.courseCode = course_now
         self.courseID = 0
         self.selectPage = 'http://newjw.lixin.edu.cn/webapp/std/edu/lesson/std-elect-course!batchOperator.action?profileId='
-        self.profileID = profile_id
+        self.profileID = str(cfg.profileID)
         self.selectStateContent = None
         self.courseTransmit = None
 
@@ -115,7 +113,6 @@ class Select:
     def transmit(self):
         now_cookies = session.cookies.get_dict()
         transmit_cookies = '; '.join([i + '=' + j for i, j in now_cookies.items()])
-        header3['Referer'] += self.profileID
         header3['Cookie'] = transmit_cookies
         self.courseTransmit = session.post(self.selectPage + self.profileID,
                                            data={'operator0': str(self.courseID) + ':true:0'})
