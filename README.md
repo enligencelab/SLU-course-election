@@ -1,13 +1,13 @@
 # newjw
- 上海立信会计金融学院自动选课程序 v2019
+A tool for auto-electing courses at Shanghai Lixin University of Accounting and Finance (version: 2019)
 
-`cfg_public`: 编辑用户名, 密码, 需要选的课程列表, 登录线程数, 选课线程数.
+`cfg_public.py` Edit user name, password, courses list, number of threading for log-in and course election.
 
-不支持自动退课, 数据格式参考注释.
+**Tip**: Without the function of canceling course election. Format of data inputed can be referred from code comments.
 
-`lixin1`: 专用于上海立信会计金融学院教务管理系统的选课网页解析程序.
+`lixin1.py` Website parser for Learning Management System of Lixin.
 
-`lixin1_listing`: 获得课程列表并保存在文本文件.
+`lixin1_listing`: Get courses list and save it to a local text file. It's designed to fix a bug: With Chrome browser, the page key is not visible sometimes.
 
-`__init__`: **主程序**, 启动自动选课.
+`__init__.py`: The main script, to elect courses.
 
