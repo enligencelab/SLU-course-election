@@ -1,4 +1,4 @@
-# newjw
+# SLU_AutoScriptForNewCourseSystem
 A tool for auto-electing courses at Shanghai Lixin University of Accounting and Finance (version: 2019)
 
 `cfg_public.py` Edit user name, password, courses list, number of threading for log-in and course election.
