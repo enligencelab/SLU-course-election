@@ -1,7 +1,6 @@
 # SLU_AutoScriptForNewCourseSystem
 
 ![](https://img.shields.io/badge/tests-pass%20|%202019.1.4-brightgreen)
-![](https://img.shields.io/badge/dependencies-python3.7-blue)
 ![](https://img.shields.io/badge/tests-deprecated%20|%202020.11.1-orange)
 
 NEW SYSTEM IS ADOPTED, AND THE OLD SYSTEM IS OFFLINE.
