@@ -1,4 +1,4 @@
-# SLU_AutoScriptForNewCourseSystem
+# SLU Auto Course Election
 
 ![](https://img.shields.io/badge/tests-deprecated%20|%202020.11.1-orange)
 ![](https://img.shields.io/badge/dependencies-python3.7-blue)
