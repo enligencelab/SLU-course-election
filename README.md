@@ -1,22 +1,20 @@
-# SLU Auto Course Election
+# Autoscript Course Election
 
 ![](https://img.shields.io/badge/tests-deprecated%20|%202020.11.1-orange)
 ![](https://img.shields.io/badge/dependencies-python3.7-blue)
 
-NEW SYSTEM IS ADOPTED, AND THE OLD SYSTEM IS OFFLINE.
+**重要通知: 2020年启用新教务系统, 与本软件不兼容, 所以本软件仅作存档. 开发者招募中, 欢迎尝试对本软件中选课系统的API更新.**
 
-Due to the shortage of teaching resources, Shanghai Lixin University provides an decreasing number of courses that students can select. However, since the server of course system always break down due to that too many students visit the course selecting pages, students usually cannot take the courses they like.
+由于教学资源的稀缺, 上海立信会计金融学院的选修课程越来越少; 但是, 选课系统经常因为过多的学生在同一时间选课而宕机, 学生通常不能选到他们所需的课程. 所以, 本组织开发了一个自动选课脚本. 请在`cfg_public.py`文件的空白处, 根据注释填写信息并启动软件, 软件即可启动多线程选课.
 
-Therefore, I make a script to autometically select courses. Fill the information in the blanks, and start it several seconds before the course selecting starts, and the program will use multiple threadings to help you select courses.
+## 免责声明
+1. 商业使用被**严格禁止**, 如发现倒卖本软件至上海立信会计金融学院并收取费用, 本组织有义务举报并起诉售卖者.
+2. 不允许设置过多线程, 造成服务器宕机或触发DDOS防御系统; 选课软件的原理是网络爬虫, 不会破坏计算机信息系统, 但设置过多线程会破坏局域网和服务器, 线程数量应以200为限. 请知悉, 按照中华人民共和国刑法, 破坏计算机信息系统罪将被处以3年有期徒刑.
+3. 本软件没有退课功能.
+4. 本软件仅提供中立的技术工具, 如果您使用本软件并被学校惩罚, 这和本软件无关.
 
-## Disclaimer
-1. Commercial use is NOT permitted.
-2. It is not allowed to set up too many processes, causing the server to break down due to excessive number of connections.
-3. This script does not have a function of cancelling course selection.
-4. This tool is just for feasibility test. If you are punished by the school, it is never related to this tool.
+## 使用说明
 
-## Usage
-
-1. Input username, password, number of threadings for login, number of threadings for course selection in `cfg_public.py`.
-2. **During the pre-selecting round,** run `lixin1_listing.py` to save all the courses to a local `*.txt` file. Then, input the list of courses to select in `cfg_public.py`.
-3. **Several seconds before selecting starts,** run `__init__.py` and monitor its running. Immediately stop it after you get courses you need.
+1. 输入"用户名", "密码", "登录线程数量", 和"选课动作线程数量"在 `cfg_public.py`文件中. 最终的线程数量是"登录线程数量"和"选课动作线程数量"的**乘积**.
+2. **请在预选课/第一轮选课阶段**(课程到达人数上限后可以选课, 抽签选课), 运行`lixin1_listing.py`以将课程序号以`*.txt`保存到本软件中, 您可以预览并选定课程序号, 作为正式选课阶段前填写配置文件的参考资料. **注意, 有时在正式选课时这个课程序号会改变, 但大部分时候不会改变.**
+3. **请在第二轮选课阶段**(课程到达人数上限后不可选课, 先到先得), 提前15~60秒运行`__init__.py`并监控其运行; 当您获得全部所选课程后, 请立刻停止运行, 以防过多发送请求数量.
